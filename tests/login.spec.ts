@@ -35,6 +35,8 @@ test('verify all items are displayed', async ({ page }: { page: Page }) => {
     await inventoryPage.inventoryItems.nth(1).click();
     // Add Backpack to cart
     await inventoryPage.addToCartBackpack.click();
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await expect(page.locator('.cart_item')).toHaveCount(1);
 
 });
 test('verify to all item are added to cart', async ({ page }: { page: Page }) => {
@@ -48,4 +50,5 @@ test('verify to all item are added to cart', async ({ page }: { page: Page }) =>
     const cartPage = new CartPage(page);
     // Add all items to the cart
     await cartPage.cartItems.first().click();
+    await page.waitForTimeout(4000);
 });
